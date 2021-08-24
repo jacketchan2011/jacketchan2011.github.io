@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="Description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+
+
+
+</head>
+
+
+<body>
+<div id="app"></div>
+
+
+<script>
+    window.$docsify = {
+      name: '我是亮仔',
+      repo: 'https://github.com/jacketchan2011',  //开启github图标
+      loadSidebar: true,
+      homepage: 'README.md',
+      showLevel: false,
+      toc: {
+        tocMaxLevel: 6,
+        target: 'h1, h2, h3, h4, h5, h6'
+      },
+      copyCode: {
+	    buttonText : 'Copy to clipboard',
+	    errorText  : 'Error',
+	    successText: 'Copied'
+	  },
+	  scrollToTop: {
+        auto: true,
+        text: 'Top',
+        right: 15,
+        bottom: 15,
+        offset: 300
+      },
+      search: {
+        paths: 'auto',
+        placeholder: '搜索',
+        noData: '找不到结果',
+        depth: 3,
+      },
+      count:{
+        countable:true,
+        fontsize:'0.9em',
+        color:'rgb(90,90,90)',
+        language:'chinese'
+      }
+    }
+
+</script>
+
+
+<script src="//cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-java.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-bash.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-c.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-sql.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-python.min.js"></script>
+
+<!-- 代码复制 -->
+<script src="//unpkg.com/docsify-copy-code@2.1.1/dist/docsify-copy-code.min.js"></script>
+
+<!-- 回到顶部 -->
+<script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
+
+<!-- 图片缩放 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+
+<!-- 搜索 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+<!-- 字数统计 -->
+<script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+
+<!-- Docsify v4 -->
+<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<script src="https://unpkg.com/docsify-plugin-toc@1.2.1/dist/docsify-plugin-toc.min.js"></script><!
+<!--<script src="docsify-toc-min.js"></script>-->
+<script src="md5.min.js"></script>
+
+<!--插入“gitalk评论”模块-->
+<script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    function my_url_parse(url) {
+      var left = url.indexOf('/#/');
+      if(left < 0) {
+        return url;
+      }
+
+      var right = url.lastIndexOf('?');
+      if (right <= 0 || right < left) {
+        right = url.length;
+      }
+      return url.substring(left, right);
+    }
+
+    function my_url_parse2(haha){
+      gittalk_id = my_url_parse(haha);
+      if(gittalk_id.length > 45) {
+        gittalk_id = md5(gittalk_id);
+      }
+      return gittalk_id
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'a8c34ab2f901c3c8c00e',
+      clientSecret: '725713c037f322254f31e597893996bb4cf9957d',
+      repo:'jacketchan2011.github.io',
+      owner: 'jacketchan2011',
+      admin: ['jacketchan2011'],
+      // facebook-like distraction free mode
+      distractionFreeMode: false,
+      id: my_url_parse2(location.hash),
+    });
+
+    // 监听URL中hash的变化，如果发现换了一个MD文件，那么刷新页面，解决整个网站使用一个gitalk评论issues的问题。
+    window.onhashchange = function(event){
+      if(event.newURL.split('?')[0] !== event.oldURL .split('?')[0]) {
+        location.reload()
+      }
+    }
+
+</script>
+
+</body>
+</html>
