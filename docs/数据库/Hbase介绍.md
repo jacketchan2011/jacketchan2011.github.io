@@ -24,7 +24,7 @@ Hbase是一个通过大量廉价的机器解决海量数据的高速存储和读
     2.基于HDFS扩展
 
 #Hbase逻辑结构
-![img.png](../imgs/Hbase逻辑结构.png)
+![img.png](Hbase专题/Hbase逻辑结构.png)
 从逻辑图上，我们将相同rowKey的写在同一行
 ##列族
 列族我将它理解为列的分类，即将属性相近的几个列划为同一个列族。创建表的时候必须就指定
@@ -46,7 +46,7 @@ Region是基于HDFS的，它的所有数据存取操作都是调用HDFS客户端
 RegionServer就是存放Region的容器，直观上说就是服务器上的一个服务。负责管理维护Region。
 
 #Hbase物理存储
-![img.png](../imgs/Hbase物理存储.png)
+![img.png](Hbase专题/Hbase物理存储.png)
 如图所示，重新定义下几个概念
 ##列
 相同的列族和列修饰符为一列。例如 info：name，info：age。
@@ -59,7 +59,7 @@ RegionServer就是存放Region的容器，直观上说就是服务器上的一�
 cell 中的数据是没有类型的，全部是字节码形式存储。
 
 #Hbase架构
-![img.png](../imgs/Hbase架构图.png)
+![img.png](Hbase专题/Hbase架构图.png)
 
 ##client
 client提供了访问Hbase接口
@@ -92,7 +92,7 @@ client提供了访问Hbase接口
 
 RegionServer的内部架构如下：
 
-![img.png](../imgs/RegionServer架构.png)
+![img.png](Hbase专题/RegionServer架构.png)
 有上图可知，RegionServer包含了
 
 1.一个WAL
@@ -108,13 +108,13 @@ RegionServer的内部架构如下：
     Region是数据库的一部分，每一个Region都有起始的rowkey和结束的
     rowkey，代表了它存储的row的范围。
 ##Region
-![img.png](../imgs/Region内部结构.png)
+![img.png](Hbase专题/Region内部结构.png)
 一个Region包含 多个Store，
 一个Store就是对应一个列族的数据，如图就有三个列族。
 再从最后一个Store中我们又可以看出，Store是由MemStore和HFile组成的。
 
 ##Store
-![img.png](../imgs/Store.png)
+![img.png](Hbase专题/Store.png)
 *MemStore
 
     每个Store都有一个MemStore实例。数据写入到WAL之后就会被放入
@@ -137,4 +137,4 @@ rowkey的字典序排列，而不是做一个缓存提高写入效率。
 2.数据多副本，保证的高可靠和高可用性
 
 ##补一个Hbase架构解析图
-![img_1.png](../imgs/Hbase架构解析.png)
+![img_1.png](Hbase专题/Hbase架构解析.png)
