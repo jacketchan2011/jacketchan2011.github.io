@@ -3,7 +3,12 @@
 * 杂谈
   * [庆祝第一篇博客](杂谈/庆祝第一篇博客.md)
 * 数据库
-  * [Hbase介绍](数据库/Hbase介绍.md)
+  * Hbase
+    * [Hbase介绍](数据库/Hbase/Hbase介绍.md)
+  * Redis
+    * [Redis学习路径](数据库/Redis/Redis学习路径.md)
+    * [Redis高可靠之AOF篇](数据库/Redis/Redis高可靠之AOF篇.md)
+    * [Redis高可靠之RDB篇](数据库/Redis/Redis高可靠之RDB篇.md)
 * 中间件
 * 性能测试
 * 工具类
