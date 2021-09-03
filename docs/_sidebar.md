@@ -9,6 +9,8 @@
     * [Redis学习路径](数据库/Redis/Redis学习路径.md)
     * [Redis高可靠之AOF篇](数据库/Redis/Redis高可靠之AOF篇.md)
     * [Redis高可靠之RDB篇](数据库/Redis/Redis高可靠之RDB篇.md)
+    * [Redis高可靠之主从同步](数据库/Redis/Redis高可靠之主从同步.md)
+    * [Redis高可靠之哨兵机制](数据库/Redis/Redis高可靠之哨兵机制.md)
 * 中间件
 * 性能测试
 * 工具类
