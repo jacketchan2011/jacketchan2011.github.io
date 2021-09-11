@@ -1,5 +1,5 @@
 # Redis高可靠之RDB篇
-![img_1.png](AOF和RDB区别.png)
+![img_1.png](Redis图/AOF和RDB区别.png)
         
     Redis会将内存中某一个时刻的状态，以文件形式记录到磁盘中，即RDB文件，是二进制文件。
 
@@ -33,7 +33,7 @@ RDB文件
 ![img.png](Redis图/AOF和RDB混合使用.png)
 
 ## 四. 整体流程
-![img.png](img.png)
+![img.png](Redis图/RDB整体流程.png)
 几点说明：
 1. RDB持久化的触发方式两种：自动和手动
 2. 自动触发场景有
@@ -53,4 +53,4 @@ RDB文件
    2. 如果调用方是子进程，则调用rdbSave执行RDB持久化逻辑。
 3. rdbSave  
 该方法是真正执行持久化的函数，具体逻辑见图
-![img_1.png](img_1.png)
+![img_1.png](Redis图/RDB之rdbSave流程.png)

@@ -28,7 +28,7 @@ Redis先执行命令，再写日志
 写入磁盘有几种策略选择。
 
 ## 持久化流程
-![img_3.png](img_3.png)
+![img_3.png](Redis图/AOF流程.png)
 主要有几个过程：命令追加、文件写入和同步、AOF重写、数据重新加载
 
 ### 命令追加
@@ -45,31 +45,40 @@ Redis先执行命令，再写日志
 
 ![img.png](Redis图/AOF写回策略.png)
 
-除了上述影响性能的因素，AOF文件太大，也会影响性能，为何？
-1. 文件太大，往里面追加命令，效率会降低
-2. 发生宕机时，如果日志里的命令太多，所有的命令要被一一执行用于故障恢复，这样整个恢复过程会非常慢
-3. 最后文件系统本身对文件大小也会限制 
-
 ### AOF重写
-![img_2.png](img_2.png)
-当一个键值对被反复修改，重写只记录最新状态对应的写操作。
+AOF文件太大的话会影响性能。
+
+    1.文件太大，往里面追加命令，效率会降低
+    2.日志里的命令太多，影响恢复速度
+![img_2.png](Redis图/AOF重写含义.png)
+AOF重写就是，当一个键值对被反复修改，重写只记录最新状态对应的写操作。
 
 ### 重写过程
 AOF重写毕竟是要将整个数据库的最新数据的操作日志都写回磁盘，很耗时。所以用子进程完成重写
 
-    AOF日志由主线程写回，而重写过程是由后台子进程bgrewriteaof完成，
-    这也是为了避免阻塞主线程，导致数据库性能下降
+    AOF日志由主线程写回，而重写过程是由后台子进程bgrewriteaof完成。
 
-可以由下图来描述重写过程
+#### AOF重写触发条件
+1. 手动触发  
+   直接调用bgrewriteaof命令
+2. 自动触发
+   由Redis的周期性方法serverCron检查在满足一定条件时触发。  
+   先介绍几个参数含义：  
+   * aof_current_size：serverCron执行时AOF文件的实时大小  
+   * aof_base_size：上一次重写后AOF文件大小  
+   两个配置项：
+   * auto-aof-rewrite-percentage：代表当前AOF文件大小（aof_current_size）和上一次重写后AOF文件大小（aof_base_size）相比，增长的比例。
+   * auto-aof-rewrite-min-size：表示运行BGREWRITEAOF时AOF文件占用空间最小值，默认为64MB；
+   
+   当满足以下两个条件时，AOF文件重写就会触发：
 
-![img.png](Redis图/AOF重写.png)
+       增长比例：(aof_current_size - aof_base_size) / aof_base_size > auto-aof-rewrite-percentage
+       文件大小：aof_current_size > auto-aof-rewrite-min-size
+3. 重写流程
+![img_5.png](Redis图/AOF重写流程.png)
 
-1. fork子进程：每次执行重写时，主线程fork出后台的bgrewriteaof子进程。
-主线程的内存会拷贝一份给子进程，里面就包含了数据库的最新数据。
-2. 两处日志：  
-   * 主线程未被阻塞，所以Redis会把当前操作写入AOF日志的缓冲区，此为第一处日志；
-   * 当前操作也会写入新的重写日志的缓冲区。等到拷贝数据的所有操作记录重写完成后，重写日志记录的这些最新操作也会写入新的 AOF 文件，以保证数据库最新状态的记录。
-
+### 数据加载流程
+![img_4.png](Redis图/AOF数据加载流程.png)
 
 
 
