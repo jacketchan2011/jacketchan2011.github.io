@@ -1,3 +1,4 @@
+# Redis数据类型之SortedSet
 SortedSet底层数据结构有两种，zset和ziplist。
 
 ![](Redis图/SortedSet结构.png)
@@ -11,7 +12,7 @@ SortedSet底层数据结构有两种，zset和ziplist。
     zset-max-ziplist-entries 128
     zset-max-ziplist-value 64
 
-## zset
+## 一. zset
     typedef struct zset {
         dict *dict;
         zskiplist *zsl;
@@ -63,6 +64,23 @@ Redis的跳表由zskiplistNode和zskiplist组成。
 
 跳表实现了类似二分查找的功能，平均时间复杂度为O(logn)
 
-## ziplist
-压缩列表是由一系列特殊编码的连续内存块组成的顺序型数据结构，一个压缩列表可以包含任意多个节点（entry），每个节点可以保存一个字节数组 或者一个整数值 。
+## 二. ziplist
+压缩列表是由一系列特殊编码的连续内存块组成的顺序型数据结构。减少了内存碎片和指针
+![img_3.png](Redis图/ziplist结构.png)
 
+* zlbytes：整个ziplist占用的内存字节数，对ziplist进行内存重分配，或者计算末端时使用。
+* zltail：到达ziplist表尾节点的偏移量。通过这个偏移量，可以在不遍历整个ziplist的前提下，弹出表尾节点。
+* zllen：ziplist中节点的数量。
+* entryX：ziplist 所保存的节点。
+* zlend：255 的二进制值 1111 1111 （UINT8_MAX） ，用于标记 ziplist 的末端。
+
+一个 ziplist 可以包含多个节点，每个节点可以划分为以下几个部分：
+
+![img_4.png](Redis图/ziplist节点结构.png)
+
+* pre_entry_length 记录了前一个节点的长度，通过这个值，可以进行指针计算，从而跳转到上一个节点。
+* encoding 和 length 两部分一起决定了 content 部分所保存的数据的类型以及长度。  
+* content 部分保存着节点的内容
+
+元素遍历  
+通过首地址+zltail找到尾部元素，再根据pre_entry_length，从后往前依次遍历。    

@@ -1,3 +1,5 @@
+![img_1.png](img_1.png)
+
 # Redis之SDS
 
 SDS(Simple Dynamic String，简单动态字符串)，是Redis底层所用的字符串表示。
