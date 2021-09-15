@@ -12,7 +12,7 @@
     * [Redis高可靠之主从同步](数据库/Redis/Redis高可靠之主从同步.md)
     * [Redis高可靠之哨兵机制](数据库/Redis/Redis高可靠之哨兵机制.md)
     * [Redis高可靠之切片集群](数据库/Redis/Redis高可靠之切片集群.md)
-    * [Redis数据类型之字符串](数据库/Redis/Redis数据类型之字符串.md)
+    * [Redis数据类型之String](数据库/Redis/Redis数据类型之String.md)
     * [Redis数据类型之SortedSet](数据库/Redis/Redis数据类型之SortedSet.md)
     * [Redis数据类型之列表](数据库/Redis/Redis数据类型之列表.md)
     * [Redis数据类型之Set](数据库/Redis/Redis数据类型之Set.md)
