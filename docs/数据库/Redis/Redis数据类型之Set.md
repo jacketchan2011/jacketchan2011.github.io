@@ -1,5 +1,5 @@
 
-![img_2.png](img_2.png)
+![img_2.png](Redis图/redis之set底层数据结构.png)
 
 redis的集合对象set底层使用了intset和hashtable两种数据结构存储。
 使用intset存储必须满足下面两个条件，否则使用hashtable，条件如下：
@@ -7,7 +7,7 @@ redis的集合对象set底层使用了intset和hashtable两种数据结构存储
 * 结合对象保存的所有元素都是整数值
 * 集合对象保存的元素数量不超过512个
 
-![img.png](img.png)
+![img.png](Redis图/intset结构体.png)
 
 * length：数组content的长度
 * encoding：共有三种，INTSET_ENC_INT16、INSET_ENC_INT32和INSET_ENC_INT64三种，分别对应不同的范围。

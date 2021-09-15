@@ -1,4 +1,4 @@
-![img_1.png](img_1.png)
+![img_1.png](Redis图/redis之string底层数据结构.png)
 
 # Redis之SDS
 
