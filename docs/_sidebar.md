@@ -20,6 +20,23 @@
 * 中间件
 * 性能测试
 * 工具类
+  * Jmeter专题
+    * 逻辑控制器 
+      * [简介](工具类/Jmeter专题/逻辑控制器/简介.md)
+      * [简单控制器](工具类/Jmeter专题/逻辑控制器/简单控制器.md)
+      * [仅一次控制器](工具类/Jmeter专题/逻辑控制器/仅一次控制器.md)
+      * [if控制器](工具类/Jmeter专题/逻辑控制器/if控制器.md)
+      * [事务控制器](工具类/Jmeter专题/逻辑控制器/事务控制器.md)
+      * [权重控制器](工具类/Jmeter专题/逻辑控制器/权重控制器.md)
+      * [Runtime控制器](工具类/Jmeter专题/逻辑控制器/Runtime控制器.md)
+      * [随机控制器](工具类/Jmeter专题/逻辑控制器/随机控制器.md)
+      * [开关控制器](工具类/Jmeter专题/逻辑控制器/开关控制器.md)
+    * BeanShell
+      * [Beanshell入门](工具类/Jmeter专题/Beanshell专题/Beanshell入门.md)
+      * [JMeter之JSR223入门](工具类/Jmeter专题/Beanshell专题/JMeter之JSR223入门.md)
+      * [Beanshell内置变量vars](工具类/Jmeter专题/Beanshell专题/Beanshell内置变量vars.md)
+      * [Beanshell内置变量props](工具类/Jmeter专题/Beanshell专题/Beanshell内置变量props.md)
+      * [Beanshell内置变量ctx](工具类/Jmeter专题/Beanshell专题/Beanshell内置变量ctx.md)
 * 自动化测试
 * 推荐系统
   * [课0-推荐总览](推荐系统/0推荐总览.md)
