@@ -48,3 +48,6 @@ public int size()
 
 * 栗子
 ![img_12.png](imgs/img_12.png)
+
+## 查看测试计划中所有jmeter属性
+右键测试计划->非测试元件—>Property Display
