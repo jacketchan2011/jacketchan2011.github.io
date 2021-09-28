@@ -77,3 +77,32 @@ Java 系统属性和 JMeter 属性可以直接通过以下命令进行覆盖，�
 |-L[category]=[priority]|覆盖日志记录设置，将特定类别设置为给定的优先级；设置根日志记录级别 |
 
     jmeter -n -t xxx.jmx -l xxx.jtl -JclientId 8C3wdasdqd
+
+# 后台运行模式
+* nohub：不挂断的运行，可以使命令永久的执行下去，即使断开SSH连接也不会影响命令的执行。**注意：nohup没有后台运行的意思**。
+    
+      语法：nohup Command [ Arg … ] [　& ]
+          无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。
+
+          如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。
+          
+          如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。
+* &：在后台运行，当用户退出（挂起）的时候，命令自动跟着结束。
+
+栗子：  
+1. sh test.sh &  
+   将sh test.sh任务放到后台 ，关闭xshell，对应的任务也跟着停止
+2. nohup sh test.sh &  
+   1. 将sh test.sh任务放到后台，但是依然可以使用标准输入，终端能够接收任何输入，重定向标准输出和标准错误到当前目录下的nohup.out文件。  
+   2. 即使关闭xshell退出当前session依然继续运行
+
+## 输出重定向
+在shell中,文件描述符通常是:STDIN标准输入,STDOUT标准输出,STDERR标准错误输出,即:0,1,2
+
+作业在后台运行的时候，可以把输出重定向到某个文件中，相当于一个日志文件，记录运行过程中的输出。
+
+使用方法：nohup command > nohup.log 2>&1 &
+
+command>nohup.log是将command的标准输出重定向到nohup.log文件，输出内容不打印到屏幕上。
+
+2>&1是把STDERR重定向到前面标准输出定向到的同名文件中，即&1就是nohup.log。
